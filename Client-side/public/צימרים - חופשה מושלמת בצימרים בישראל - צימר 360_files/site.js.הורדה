@@ -1,0 +1,705 @@
+﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+// for details on configuring this project to bundle and minify static web assets.
+
+// Write your JavaScript code.
+function openPanel(namePanel, nameVideo, path, placeID) {
+    //var listIcons = document.getElementsByClassName("fingerClass");
+    //for (var i = 0; i < listIcons.length; i++) {
+    //    listIcons[i].style.display = "block";
+    //}
+    if (PicElem != undefined) {
+        PanelElem.classList.add("transitionHide");
+        PanelElem.classList.remove("transitionShow");
+        PicElem.classList.add("transitionShow");
+        PicElem.classList.remove("transitionHide");
+    }
+    var panelElem = document.getElementById(namePanel);
+    //for (var i = 0; i < panelElems.length; i++) {
+    //    if (panelElems[i].offsetWidth || panelElems[i].offsetHeight || panelElems[i].getClientRects().length) {
+    //        panelElem = panelElems[i];
+    //        break;
+    //    }
+    //}
+    var videoElems = document.getElementsByName(nameVideo);
+    var videoElem;
+    var thisPlaceID = placeID;
+    if (placeID.length != undefined)
+        thisPlaceID = placeID[0].id;
+    if (videoElems.length > 1) {
+        for (var i = 0; i < videoElems.length; i++) {
+            if (videoElems[i].id != thisPlaceID)
+                continue;
+            if (videoElems[i].offsetWidth || videoElems[i].offsetHeight || videoElems[i].getClientRects().length) {
+                videoElem = videoElems[i];
+                break;
+            }
+        }
+    }
+    else {
+        videoElem = videoElems[0];
+    }
+    panelElem.classList.add("transitionShow");
+    panelElem.classList.remove("transitionHide");
+    videoElem.classList.add("transitionHide");
+    videoElem.classList.remove("transitionShow");
+    if (NameTouchIcon != undefined)
+        if (document.getElementsByName("touchIcon_" + NameTouchIcon).length > 0)
+            document.getElementsByName("touchIcon_" + NameTouchIcon)[0].style.display = "block";
+    if (document.getElementsByName("touchIcon_" + thisPlaceID).length > 0)
+        document.getElementsByName("touchIcon_" + thisPlaceID)[0].style.display = "none";
+    ShowPanel(namePanel, path)
+    PicElem = videoElem;
+    NameTouchIcon = thisPlaceID;
+    PanelElem = panelElem;
+}
+function ShowPanel(idPanel, path) {
+    var p = pannellum.viewer(idPanel, {
+        "showZoomCtrl": false,
+        "keyboardZoom": false,
+        "showControls": false,
+        "maxLevel": 0,
+        "autoLoad": true,
+        "autoRotate": -2,
+        "mouseZoom ": false,
+        "compass": false,
+        "hfov": 100.0,
+        "minHfov": 100.0,
+        "maxHfov": 100.0,
+        "type": "multires",
+        "multiRes": {
+            "basePath": path,
+            "path": "/%l/%s%y_%x",
+            "fallbackPath": "/fallback/%s",
+            "extension": "jpg",
+            "tileResolution": 488,
+            "maxLevel": 1,
+            "cubeResolution": 488
+        }
+    });
+    document.getElementById(idPanel).panelControl = p;
+    //loadedPanels[idPanel] = p;
+}
+var loadedPanels = {};
+
+ 
+function registerCall() {
+    var callback = function () {
+        if (typeof (url) != 'undefined') {
+            window.location = url;
+        }
+    };
+    gtag('event', 'conversion', {
+        'send_to': 'AW-10845669434/eiFNCI_k7YcYELqQz7Mo',
+        'transaction_id': '',
+        'event_callback': callback
+    });
+    return false;
+}
+
+function showNextAndPrevPic(countPic, text, id) {
+    var thisParentZeemer = document.getElementById(id);
+    if (document.getElementById("DetailsPopup") && document.getElementById("DetailsPopup").style.display == "block") {
+        thisParentZeemer = document.getElementById("DetailsPopup").getElementsByClassName("pass-pictures")[0]
+    }
+    var AllPicToZeemar = thisParentZeemer.getElementsByClassName('IAmPanel');
+    if (AllPicToZeemar.length > countPic) {
+        if (window.innerWidth < 759)
+            AllPicToZeemar = thisParentZeemer.getElementsByClassName("only-mobile")[0].getElementsByClassName('IAmPanel');
+        else
+            AllPicToZeemar = thisParentZeemer.getElementsByClassName("only-desktop")[0].getElementsByClassName('IAmPanel');
+    }
+    console.log(AllPicToZeemar.length + " " + countPic)
+    for (var i = 0; i < AllPicToZeemar.length; i++) {
+        if (AllPicToZeemar[i].className.includes("transitionShow")) {
+            if (text == "next") {
+                if (i + 1 < countPic) {
+                    AllPicToZeemar[i + 1].classList.add("transitionShow");
+                    AllPicToZeemar[i + 1].classList.remove("transitionHide");
+                }
+                else {
+                    AllPicToZeemar[0].classList.add("transitionShow");
+                    AllPicToZeemar[0].classList.remove("transitionHide");
+                }
+
+                AllPicToZeemar[i].classList.add("transitionHide");
+                AllPicToZeemar[i].classList.remove("transitionShow");
+                break;
+            }
+            if (text == "prev") {
+                if (i - 1 >= 0) {
+                    AllPicToZeemar[i - 1].classList.add("transitionShow");
+                    AllPicToZeemar[i - 1].classList.remove("transitionHide");
+                }
+                else {
+                    AllPicToZeemar[AllPicToZeemar.length - 1].classList.add("transitionShow");
+                    AllPicToZeemar[AllPicToZeemar.length - 1].classList.remove("transitionHide");
+                }
+                AllPicToZeemar[i].classList.add("transitionHide");
+                AllPicToZeemar[i].classList.remove("transitionShow");
+                break;
+            }
+        }
+    }
+}
+
+const delta = 2;
+let startX;
+let startY;
+
+function startHandDrag() {
+    startX = event.pageX;
+    startY = event.pageY;
+}
+function touchMove() {
+    if (!removedHand) {
+        document.body.className = "hideFinger"
+        removedHand = true;
+    }
+}
+
+var removedHand = false;
+function HandDrag() {
+
+    if (!removedHand) {
+        console.log(startX);
+        console.log(startY);
+        const diffX = Math.abs(event.pageX - startX);
+        const diffY = Math.abs(event.pageY - startY);
+        if (diffX > delta || diffY > delta) {
+            document.body.className = "hideFinger"
+            removedHand = true;
+        }
+    }
+
+}
+
+
+function showPic1(countPic, text, id) {
+    var length = countPic;
+    //document.querySelectorAll('.hidePanel').forEach(function (el) {
+    //    if (el.style.display == 'block')
+    //        el.style.display = "none";
+    //});
+    var thisParentZeemer = document.getElementById(id);
+    var thisZeemer;
+    var listDivPic = thisParentZeemer.getElementsByClassName("picture-sub-place");
+    if (listDivPic.length != 0) {
+        for (var i = 0; i < listDivPic.length; i++) {
+            if (listDivPic[i].getBoundingClientRect().width != 0) {
+                thisZeemer = listDivPic[i];
+                break;
+            }
+        }
+    }
+    else {
+        thisZeemer = document.getElementById(id);
+    }
+    for (var i = 0; i < length; i++) {
+        if (thisZeemer.getElementsByClassName("place-picture")[i].style.display == "block") {
+            //Array.from(thisZeemer.getElementsByClassName("place-picture"), e => e.style.display = "none");
+            if (text == "next") {
+                if (i + 1 != length) {
+                    thisZeemer.getElementsByClassName("hidePanel")[i + 1].style.display = "block";
+                    thisZeemer.getElementsByClassName("place-picture")[i + 1].style.display = "block";
+                    thisZeemer.getElementsByClassName("place-picture")[i].style.display = "none";
+                    thisZeemer.getElementsByClassName("hidePanel")[i].style.display = "none";
+                    //window.document.dispatchEvent(new Event("DOMContentLoaded", {
+                    //    bubbles: true,
+                    //    cancelable: true
+                    //}));
+                }
+                else {
+                    thisZeemer.getElementsByClassName("hidePanel")[0].style.display = "block";
+                    thisZeemer.getElementsByClassName("place-picture")[0].style.display = "block";
+                    thisZeemer.getElementsByClassName("place-picture")[i].style.display = "none";
+                    thisZeemer.getElementsByClassName("hidePanel")[i].style.display = "none";
+                    //window.document.dispatchEvent(new Event("DOMContentLoaded", {
+                    //    bubbles: true,
+                    //    cancelable: true
+                    //}));
+                }
+
+            }
+            else if (text = "prev") {
+                if (i - 1 >= 0) {
+                    thisZeemer.getElementsByClassName("place-picture")[i - 1].style.display = "block";
+                    thisZeemer.getElementsByClassName("hidePanel")[i - 1].style.display = "block";
+                    thisZeemer.getElementsByClassName("place-picture")[i].style.display = "none";
+                    thisZeemer.getElementsByClassName("hidePanel")[i].style.display = "none";
+                    //window.document.dispatchEvent(new Event("DOMContentLoaded", {
+                    //    bubbles: true,
+                    //    cancelable: true
+                    //}));
+                }
+                else {
+                    thisZeemer.getElementsByClassName("place-picture")[length - 1].style.display = "block";
+                    thisZeemer.getElementsByClassName("hidePanel")[length - 1].style.display = "block";
+                    thisZeemer.getElementsByClassName("place-picture")[i].style.display = "none";
+                    thisZeemer.getElementsByClassName("hidePanel")[i].style.display = "none";
+                    //window.document.dispatchEvent(new Event("DOMContentLoaded", {
+                    //    bubbles: true,
+                    //    cancelable: true
+                    //}));
+                }
+
+            }
+            break;
+        }
+    }
+
+}
+var isInViewport = function (elem) {
+    var distance = elem.getBoundingClientRect();
+    //if (distance.width == 0)
+    //    return false;
+    return (
+        distance.top + distance.height >= 0 &&
+        distance.left + distance.width >= 0 &&
+        distance.top <= (window.innerHeight || document.documentElement.clientHeight) &&
+        distance.right - distance.width <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+};
+function clickOnVideo(idDivZeemer) {
+    debugger;
+    var listVideos = document.getElementById(idDivZeemer).getElementsByTagName("video");
+    for (let elem of listVideos) {
+        if (elem.style.display === 'block') {
+            elem.click();
+            break;
+        }
+
+    }
+}
+
+window.addEventListener('load', function () {
+ 
+    var picker = new Lightpick({
+        field: document.getElementById('dates'),
+        singleDate: false,
+        minDate: new Date(),
+        onSelect: function (start, end) {
+            var str = '';
+            str += start ? start.format('Do MMMM YYYY') + ' עד ' : '';
+            str += end ? end.format('Do MMMM YYYY') : '...';
+            document.getElementById('startDate').value = start ? start.format('YYYY-MM-DD') : '';
+            document.getElementById('endDate').value = end ? end.format('YYYY-MM-DD') : '';
+        }
+    });
+    picker.setDateRange(new Date(), moment().add(1, 'day'));
+});
+
+function editToggleFeature(featureID) {
+    let el2 = document.getElementById(`feature2-${featureID}-val`);
+    let el = document.getElementsByName(`feature${featureID}-val`)[0];
+    if (el.value == "true") {
+        el.parentNode.querySelector('.end-feature').classList.add("icon-unselected");
+        var c = el.parentNode.querySelector('.set-icon-location');
+        if (c)
+            c.classList.add("icon-unselected")
+        c = el.parentNode.querySelector('.sub-feature-number');
+        if (c)
+            c.classList.add("icon-unselected")
+        el.value = "false";
+        el2.value = "false";
+    }
+    else {
+        el.parentNode.querySelector('.end-feature').classList.remove("icon-unselected");
+        var c = el.parentNode.querySelector('.set-icon-location');
+        if (c)
+            c.classList.remove("icon-unselected")
+        c = el.parentNode.querySelector('.sub-feature-number');
+        if (c)
+            c.classList.remove("icon-unselected")
+        el.value = "true";
+        el2.value = "true";
+    }
+}
+function CheckEnter(e) {
+    e.preventDefault();
+    if (e.keyCode == 13) {
+        var res = document.getElementsByClassName("autocomplete-suggestion");
+        if (res.length == 1) {
+            debugger
+            autoCompleteRes(res[0])
+        }
+    }
+}
+
+function autoCompleteRes(item) {
+            debugger;
+            if (item.dataset.itemtype == 'ftr') {
+                window.location = "/" + item.dataset.nameplcmplx;
+                // + "&State=" + allOpenedIDs.join();
+            }
+            else if (item.dataset.itemtype == 'subZ') {
+                window.location = "/" + item.dataset.nameplcmplx;
+                //+ "&State=" + allOpenedIDs.join();
+            }
+            else if (item.dataset.itemtype == 'zone') {
+                window.location = "/" + item.dataset.nameplcmplx;
+                //+ item.dataset.iditem + "&State=" + allOpenedIDs.join();
+            }
+            else if (item.dataset.itemtype == 'nam') {
+                window.location = item.dataset.iditem2;
+            }
+            else if (item.dataset.itemtype == 'cmplx') {
+                window.location = "/Location/C" + item.dataset.iditem + "/" + (item.dataset.nameplcmplx).replaceAll(" ", "-");
+            }
+
+            //+ "&State=" + allOpenedIDs.join();
+            else if (item.dataset.itemtype == 'yshv') {
+                //window.location = "/.?YishuvID=" + item.dataset.iditem;
+                window.location = "/Yishuv/" + item.dataset.iditem + "/" + (item.dataset.nameitem).replaceAll(" ", "-");
+                //+ "&State=" + allOpenedIDs.join();
+            }
+            else if (item.dataset.itemtype == 'plc') {
+                window.location = "/Location/" + item.dataset.iditem + "/" + item.dataset.nameplcmplx;
+            }
+            else if (item.dataset.itemtype == 'specel') {
+
+                window.location = "/" + item.dataset.iditem2;
+            }
+            else {
+                window.location = "/" + item.dataset.iditem;
+                //+ "&State=" + allOpenedIDs.join();
+            }
+            //alert('Item "' + item.getAttribute('data-langname') + ' (' + item.getAttribute('data-lang') + ')" selected by ' + (e.type == 'keydown' ? 'pressing enter' : 'mouse click') + '.');
+
+        }
+
+var demo = new autoComplete(getAutoCompleteOptions('search'));
+var demoMobile = new autoComplete(getAutoCompleteOptions('searchMobile'));
+function getAutoCompleteOptions(id) {
+    return {
+        selector: '#' + id,
+        minChars: 2,
+        source: function (term, response) {
+            term = term.toLowerCase();
+            fetch('/api/autocomplete/GetSearch/' + encodeURI(term) + "/" + '@Model.State.ToString()')
+                .then(resp => resp.json())
+                .then(data => response(data));
+        },
+        renderItem: function (item, search) {
+            var re = new RegExp("(" + search.split(' ').join('|') + ")", "gi");
+            return '<div class="autocomplete-suggestion" data-itemtype="' + item[0] + '" data-iditem="' + item[2] +
+                '" data-iditem2="' + item[3] + '" data-nameitem="' + item[1] + '" data-nameplcmplx="' + item[4] + '" data-val="' + search +
+                '"><div class="div-img-border" style="background-image: url(' + item[5] + ');background-size:cover;"></div> ' + item[1].replace(re, "<b>$1</b>") + '</div>';
+        },
+        onSelect: function (e, term, item) {
+            autoCompleteRes(item)
+         }
+    }
+}
+
+function BookMark(al, span) {
+    let placeid = span.dataset.placeid;
+    if (span.classList.contains('color-rose')) {
+        let allSelected = document.getElementsByClassName("color-rose");
+        Array.from(allSelected).forEach((el) => {
+            if (el.dataset.placeid == placeid) {
+                el.classList.remove('color-rose');
+                el.classList.add('color-white');
+            }
+        });
+        bookMarkCount--;
+        fetch('/api/Cookie/Post?id=' + al + '&add=false', { method: 'POST' });
+    }
+    else {
+        let allUnselected = document.getElementsByClassName("color-white");
+        Array.from(allUnselected).forEach((el) => {
+            if (el.dataset.placeid == placeid) {
+                el.classList.remove('color-white');
+                el.classList.add('color-rose');
+            }
+        });
+        fetch('/api/Cookie/Post?id=' + al + '&add=true', { method: 'POST' });
+        bookMarkCount++;
+    }
+    if (bookMarkCount == 0) {
+        document.getElementById("bookmarkLinkDesktop").style.display = "none";
+        document.getElementById("bookmarkLinkMobile").style.display = "none";
+        //document.getElementById("countBook").style.display = "none";
+    }
+    else {
+        document.getElementById("bookmarkLinkDesktop").style.display = "block";
+        document.getElementById("bookmarkLinkMobile").style.display = "block";
+        //document.getElementById("countBook").style.display = "block";
+        document.getElementById("countBookDesktop").innerHTML = "(" + bookMarkCount + ")";
+        //document.getElementById("countBookMobile").innerHTML = "(" + bookMarkCount + ")";
+    }
+    if (window.location.href.includes("/Bookmark")) {
+        if (bookMarkCount == 0)
+            document.location.href = "/";
+        else {
+            setTimeout(() => {
+                document.getElementById(`one-place-bookmark-${al}`).style.display = "none";
+            }, 500);
+        }
+    }
+}
+function goToFeaturesInPlaceD(id, name, LinkToVTour) {
+    window.location = "/Location/" + id + "/" + LinkToVTour + "#features";
+}
+
+
+
+function showFirstVideo(nameClass) {
+    //var lengthZeemer = document.getElementsByClassName(nameClass);
+    //for (var i = 0; i < lengthZeemer.length; i++) {
+    //    if (lengthZeemer[i] != undefined && lengthZeemer[i].getElementsByClassName("place-picture")[0] != undefined
+    //        && lengthZeemer[i].displayedOnce != true) {
+    //        lengthZeemer[i].getElementsByClassName("place-picture")[0].style.display = "block";
+    //        lengthZeemer[i].displayedOnce = true;
+    //    }
+    //}
+}
+
+const iframe = document.getElementById("iframe-siyur");
+if (iframe)
+    iframe.addEventListener("load", function () {
+        document.getElementById("loader").style.display = "none";
+        console.log("Finish");
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+var previewScrollTop = document.scrollingElement.scrollTop;
+
+var insideFunctionOpenModal = false;
+var checkOpenModelId = 0;
+
+function openModal(link, id, outdoorLink, thisLink) {
+    window.open('https://tours.tzimer360.co.il/' + link, '_blank')
+    return;
+    if (!insideFunctionOpenModal) {
+        var OpenModelId = setTimeout(checkOpenModel, 4000, link);
+        checkOpenModelId = OpenModelId;
+        insideFunctionOpenModal = true;
+        previewScrollTop = document.scrollingElement.scrollTop;
+        document.getElementById("loader").style.display = "block";
+        document.getElementsByClassName("mainDiv")[0].style.display = "none";
+        document.getElementById("iframe-siyur").src = "https://tours.tzimer360.co.il/" + link;
+        document.getElementById(id).click();
+        var ToOutDoor = document.getElementById("ToOutDoor")
+        var ToInDoor = document.getElementById("ToInDoor");
+        if (outdoorLink == "") {//מתחם שיש לו מתחם חןץ
+            ToOutDoor.style.display = 'none';
+            ToInDoor.style.display = 'none';
+        }
+        else {
+            if (link == outdoorLink)//נמצא במתחם חוץ
+            {
+                ToOutDoor.style.display = 'none';
+                ToInDoor.style.display = 'block';
+                ToInDoor.addEventListener('click', function () { openModal(thisLink, id, outdoorLink, thisLink) })
+            }
+            else//נמצא במתחם 
+            {
+                ToOutDoor.style.display = 'block';
+                ToOutDoor.addEventListener('click', function () { openModal(outdoorLink, id, outdoorLink, thisLink) })
+                ToInDoor.style.display = 'none';
+            }
+        }
+
+
+    }
+
+    setTimeout(() => insideFunctionOpenModal = false, 20);
+
+}
+
+function checkOpenModel(link) {
+    if (document.getElementById("iframe-siyur").src == 'https://localhost:44333/' ||
+        document.getElementById("iframe-siyur").src == 'https://www.tzimer360.co.il/' ||
+        (document.getElementById("iframe-siyur").src.length > 28 && document.getElementById("iframe-siyur").src.indexOf("Location") != -1))
+        OpenvirtulTourModal(link);
+}
+var lastOpenedLink = '';
+function ClosedvirtulTourModal() {
+    document.getElementById('virtulTourPopup').style.display = 'none';
+}
+function OpenvirtulTourModal(link) {
+    lastOpenedLink = link;
+    document.getElementById('virtulTourPopup').style.display = 'block';
+}
+function OpenNewWindow() {
+    window.open('https://tours.tzimer360.co.il/' + lastOpenedLink, '_blank')
+}
+function ClosedCookiesWarningModal() {
+
+    document.getElementById('CookiesWarningPopup').style.display = 'none';
+}
+function OpenCookiesWarningModal() {
+
+    if (document.cookie.indexOf('CookiesWarning=read') == -1) {
+        document.getElementById('CookiesWarningPopup').style.display = 'block';
+    }
+}
+async function OpenInformationalViduoModal(open) {
+
+    if (open == 0) {
+        if (document.cookie.indexOf('InformationalViduo=read') == -1) {
+            document.getElementById('InformationalViduoPopup').style.display = 'block';
+        }
+    }
+    if (open == 1) {
+        document.getElementById('InformationalViduoPopup').style.display = 'block';
+        await document.getElementById('InformationalViduo').play();
+        document.getElementById('play-viduo').style.display = 'none';
+    }
+}
+async function playViduo() {
+    debugger
+    await document.getElementById('InformationalViduo').play();
+    document.getElementById('play-viduo').style.display = 'none';
+}
+function ClosedCookiesWarningForeverModal() {
+
+    var dateEx = new Date();
+    dateEx.setFullYear(dateEx.getFullYear() + 1);
+    document.cookie = "CookiesWarning=read;expires=" + dateEx.toUTCString() + ";path=/";
+    document.getElementById('CookiesWarningPopup').style.display = 'none';
+}
+function ClosedInformationalViduo() {
+    var dateEx = new Date();
+    dateEx.setFullYear(dateEx.getFullYear() + 1);
+    document.cookie = "InformationalViduo=read;expires=" + dateEx.toUTCString() + ";path=/";
+    document.getElementById('InformationalViduoPopup').style.display = 'none';
+    document.getElementById('InformationalViduo').pause();
+}
+function registerSiyur(placeID) {
+    fetch('/api/tracker/VirtualSiyur?placeID=' + placeID, { method: 'POST' });
+}
+function SeenPlace(al) {
+    //let placeid = span.dataset.placeid;
+    //if (span.classList.contains('color-rose')) {
+    //    let allSelected = document.getElementsByClassName("color-rose");
+    //    Array.from(allSelected).forEach((el) => {
+    //        if (el.dataset.placeid == placeid) {
+    //            el.classList.remove('color-rose');
+    //            el.classList.add('color-white');
+    //        }
+    //    });
+    //    seenPlaceCount--;
+    //    fetch('/api/Cookie/PostSee?id=' + al + '&add=false', { method: 'POST' });
+    //}
+    //else {
+    //    let allUnselected = document.getElementsByClassName("color-white");
+    //    Array.from(allUnselected).forEach((el) => {
+    //        if (el.dataset.placeid == placeid) {
+    //            el.classList.remove('color-white');
+    //            el.classList.add('color-rose');
+    //        }
+    //    });
+
+    //}
+    let add;
+    fetch('/api/Cookie/PostSee?id=' + al + '&add=true', { method: 'POST' })
+    //.then(data => {
+    //    debugger;
+    //    add = data;
+    //    if (add)
+    //        seenPlaceCount++;
+    //    document.getElementById("countSeenPlace").innerHTML = "(" + seenPlaceCount + ")";
+    //})
+    //.catch(error => {
+    //    console.error(error);
+    //});;
+
+    //if (seenPlaceCount == 0) {
+    //    document.getElementById("seenPlaceLink").style.display = "none";
+    //    //document.getElementById("countBook").style.display = "none";
+    //}
+    //else {
+    //    document.getElementById("seenPlaceLink").style.display = "block";
+    //document.getElementById("countBook").style.display = "block";
+
+    //}
+}
+function RemoveFromBookMark(id) {
+    bookMarkCount--;
+    fetch('/api/Cookie/Post?id=' + id + '&add=false', { method: 'POST' });
+    if (window.location.href.includes("/Bookmark")) {
+        if (bookMarkCount == 0)
+            document.location.href = "/";
+        else
+            document.getElementById(`one-place-bookmark-${id}`).style.display = "none";
+    }
+}
+function BookMarkI(al, i) {
+    if (i.classList.contains('fas')) {
+        i.src = "/assests/images/love.svg"
+        i.classList.remove('fas');
+        i.classList.add('far');
+        bookMarkCount--;
+        fetch('/api/Cookie/Post?id=' + al + '&add=false', { method: 'POST' });
+    }
+    else {
+        i.src = "/assests/images/loveClick.svg"
+        i.classList.remove('far');
+        i.classList.add('fas');
+        fetch('/api/Cookie/Post?id=' + al + '&add=true', { method: 'POST' });
+        bookMarkCount++;
+    }
+    if (bookMarkCount == 0) {
+        document.getElementById("bookmarkLinkDesktop").style.display = "none";
+        document.getElementById("bookmarkLinkMobile").style.display = "none";
+        //document.getElementById("countBook").style.display = "none";
+    }
+    else {
+        document.getElementById("bookmarkLinkDesktop").style.display = "block";
+        document.getElementById("bookmarkLinkMobile").style.display = "block";
+        //document.getElementById("countBook").style.display = "block";
+    }
+    document.getElementById("countBookDesktop").innerHTML = "(" + bookMarkCount + ")";
+    //document.getElementById("countBookMobile").innerHTML = "(" + bookMarkCount + ")";
+}
+
+function insertHTMLWScripts(targetID, htmlString) {
+
+    var target = document.getElementById(targetID);
+    target.insertAdjacentHTML("beforeend", htmlString);
+    var scripts = target.getElementsByTagName("script");
+    while (scripts.length) {
+        var script = scripts[0];
+        script.parentNode.removeChild(script);
+        var newScript = document.createElement("script");
+        if (script.src) {
+            newScript.src = script.src;
+        } else if (script.textContent) {
+            newScript.textContent = script.textContent;
+        } else if (script.innerText) {
+            newScript.innerText = script.innerText;
+        }
+        document.body.appendChild(newScript);
+    }
+}
+
+
+function executeScripts(htmlNode) {
+
+
+    var scripts = htmlNode.getElementsByTagName("script");
+    while (scripts.length) {
+        var script = scripts[0];
+        script.parentNode.removeChild(script);
+        var newScript = document.createElement("script");
+        if (script.src) {
+            newScript.src = script.src;
+        } else if (script.textContent) {
+            newScript.textContent = script.textContent;
+        } else if (script.innerText) {
+            newScript.innerText = script.innerText;
+        }
+        document.body.appendChild(newScript);
+    }
+}

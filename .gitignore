@@ -1,0 +1,41 @@
+# ========== כלליים ==========
+node_modules/
+.env
+.env.* 
+*.log
+*.cache
+*.tmp
+*.temp
+dist/
+build/
+
+# ========== צד לקוח - React ==========
+Client-side/node_modules/
+Client-side/.env
+Client-side/.env.* 
+Client-side/build/
+Client-side/.next/
+Client-side/.cache/
+Client-side/coverage/
+Client-side/.vite/
+
+# ========== צד שרת - Node.js ==========
+Server-side/node_modules/
+Server-side/.env
+Server-side/.env.* 
+Server-side/dist/
+Server-side/build/
+Server-side/coverage/
+Server-side/.cache/
+
+# ========== כלי פיתוח ==========
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# ========== מערכת הפעלה ==========
+.DS_Store
+Thumbs.db

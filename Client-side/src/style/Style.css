@@ -1,0 +1,19 @@
+.nav {
+    background-color: black;
+    height: 2rem;
+    padding: 2rem 0;
+}
+
+.link {
+    color: antiquewhite;
+    margin: 0 2rem;
+    text-decoration: none;
+}
+
+.active {
+    color: chocolate;
+}
+
+.un {
+    color: chocolate;
+}

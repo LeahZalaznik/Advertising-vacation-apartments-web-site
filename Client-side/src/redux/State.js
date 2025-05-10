@@ -1,0 +1,117 @@
+import { CreditCard } from "@mui/icons-material"
+
+export const initialState = {
+   
+    typeUsers: [//סוגי משתמשים
+        { typeCode: '1', description: 'user' },
+        { typeCode: '2', description: 'maneger' }
+    ],
+    users: [//משתמשים
+        { keyUser: 100, username: 'חיהלה', id: '215040296', phone: '0556762836', password: 't836',Card:{ creditCard: '4580123412341234', ex: '07/27', cvv: '123'}, typeCode: '2' },
+        { keyUser: 100, username: 'leah', id: '215040296', phone: '0556762836', password: '1111',Card:{ creditCard: '4580123412341234', ex: '07/27', cvv: '123'}, typeCode: '1' },
+    ],
+    typeCar: [//סוגי רכב
+        { keyTypeCar: 300, description: 'פרטי' },
+        { keyTypeCar: 301, description: 'סטיישן' },
+        { keyTypeCar: 302, description: 'משפחתי' },
+        { keyTypeCar: 303, description: 'בימבה' },
+        { keyTypeCar: 304, description: 'מנהלי' },
+        { keyTypeCar: 305, description: 'גיפ' },
+        { keyTypeCar: 307, description: 'מסחרי' },
+        { keyTypeCar: 308, description: 'מיניבוס' },
+    ],
+    modelCar: [//דגמי רכב
+        { keyModel: 200, company: 'טיוטה', model: 'קורולה', keyTypeCar: 301 },
+        { keyModel: 201, company: 'טיוטה', model: 'קורולה קור', keyTypeCar: 302 },
+        { keyModel: 202, company: 'טיוטה', model: 'האייס מסחרי', keyTypeCar: 307 },
+        { keyModel: 203, company: 'טיוטה', model: 'פוטון', keyTypeCar: 308 },
+        { keyModel: 206, company: 'יונדאי', model: 'איוניק', keyTypeCar: 304 },
+        { keyModel: 207, company: 'יונדאי', model: 'אינסטר', keyTypeCar: 304 },
+        { keyModel: 208, company: 'וולבא', model: 'אקס30', keyTypeCar: 301 },
+        { keyModel: 209, company: 'מרצדס', model: 'שוהם', keyTypeCar: 308 },
+        { keyModel: 210, company: 'סוזוקי', model: 'יולה', keyTypeCar: 300 },
+        { keyModel: 211, company: 'סקודה', model: 'סקאלה', keyTypeCar: 301 },
+        { keyModel: 212, company: 'קיה', model: 'נירו פלוס', keyTypeCar: 302 },
+        { keyModel: 213, company: 'קיה', model: 'סול', keyTypeCar: 300 },
+        { keyModel: 214, company: 'קיה', model: 'סיד', keyTypeCar: 302 },
+        { keyModel: 215, company: 'קיה', model: 'ריו', keyTypeCar: 301 },
+        { keyModel: 216, company: 'רנו', model: 'זואי', keyTypeCar: 300 },
+        { keyModel: 217, company: 'רנו', model: 'מגאן', keyTypeCar: 302 },
+        { keyModel: 218, company: 'שברולט', model: 'בלייזר', keyTypeCar: 301 },
+        { keyModel: 219, company: 'שברולט', model: 'סוניק', keyTypeCar: 300 },
+        { keyModel: 220, company: 'גיפ', model: 'אונגאר', keyTypeCar: 305 },
+        { keyModel: 221, company: 'גיפ', model: 'גראנד', keyTypeCar: 305},
+        { keyModel: 222, company: 'גיפ', model: 'רוביקן', keyTypeCar: 305 },
+        { keyModel: 223, company: 'בימבה', model: 'רי', keyTypeCar: 303 },
+       
+    ],
+    typeDrive: [//סוג הנעה
+        { keyDrive: 400, description: 'דלק', pricePerLiter: 7.15},
+        { keyDrive: 402, description: 'גז', pricePerLiter: 8.32},
+        { keyDrive: 403, description: 'חשמלי', pricePerLiter: 4 },
+        { keyDrive: 404, description: 'היברידי', pricePerLiter: 5 }
+    ],
+    cars: [//רכבים
+        { codeCar: 503, licensing: '1234568', keyModel: 222, numSeaerts: '5', pic: 'גיפ רוביקן אפור 4 במדבר 2', year: '2020', gir: false, keyDrive: 400, pricePerHour:20, needKmsh: 13.5, literLeft: 50, street:'ירושלים', city:'תל אביב', available: true },
+        { codeCar: 504, licensing: '1234598', keyModel: 222, numSeaerts: '5', pic: 'גיפ רוביקן אפור 4 במדבר', year: '2020', gir: true, keyDrive: 403, pricePerHour:20, needKmsh: 12, literLeft: 50, street:'מלוב', city:'הרצליה', available: true },
+        { codeCar: 505, licensing: '14725896', keyModel: 222, numSeaerts: '7', pic: 'גיפ רוביקן לבן במדבר', year: '2022', gir: true, keyDrive: 402, pricePerHour:40, needKmsh: 13, literLeft: 50, street:'מדבר', city:'ים המלח', available: true },
+        { codeCar: 506, licensing: '154236581', keyModel: 222, numSeaerts: '8', pic: 'גיפ רוביקן', year: '2024', gir: true, keyDrive: 400, pricePerHour:50, needKmsh: 11.2, literLeft: 60, street:'ירושלים', city:'קינג גורג', available: true },
+        { codeCar: 507, licensing: '789456123', keyModel: 208, numSeaerts: '5', pic: 'וולוו1', year: '2019', gir: true, keyDrive: 403, pricePerHour:20, needKmsh: 10, literLeft: 60, street:'בר אילן', city:'ירושלים', available: true },
+        { codeCar: 508, licensing: '147852369', keyModel: 200, numSeaerts: '7', pic: 'טיוטה2', year: '2021', gir: true, keyDrive: 404, pricePerHour:30, needKmsh: 14, literLeft: 70, street:'אהרונסון', city:'בני ברק', available: true },
+        { codeCar: 509, licensing: '85214796', keyModel: 201, numSeaerts: '7', pic: 'טיוטה3', year: '2022', gir: true, keyDrive: 404, pricePerHour:30, needKmsh: 15, literLeft: 60, street:'גני הדר', city:'פתח תקווה', available: true },
+        { codeCar: 510, licensing: '14523698', keyModel: 202, numSeaerts: '7', pic: 'טיוטה-קרולה קרוס', year: '2024', gir: true, keyDrive: 304, pricePerHour:30, needKmsh: 18, literLeft: 80, street:'גני הדר', city:'חיפה', available: true },
+        { codeCar: 511, licensing: '84596578', keyModel: 206, numSeaerts: '5', pic: 'יונדאי 2', year: '2016', gir: false, keyDrive: 404, pricePerHour:20, needKmsh: 16, literLeft: 50, street:'רשבי', city:'מירון', available: true },
+        { codeCar: 512, licensing: '14785698', keyModel: 207, numSeaerts: '5', pic: 'יונדאי', year: '2017', gir: false, keyDrive: 400, pricePerHour:20, needKmsh: 11, literLeft: 80, street:'גבעה', city:'תפרח', available: true },
+        { codeCar: 513, licensing: '12345847', keyModel: 206, numSeaerts: '7', pic: 'יונדאי3', year: '2018', gir: true, keyDrive:400, pricePerHour:30, needKmsh:11.1, literLeft: 70, street:'אל-נקווה', city:'אופקים', available: true },
+        { codeCar: 514, licensing: '14523698', keyModel: 207, numSeaerts: '7', pic: 'יונדאי4', year: '2018', gir: false, keyDrive:400, pricePerHour:30, needKmsh: 11.2, literLeft: 90, street:'אשדוד-ים', city:'אשדוד', available: true },
+        { codeCar: 515, licensing: '23456789', keyModel: 222, numSeaerts: '8', pic: 'ים גיפ רוביקן', year: '2015', gir: true, rive:400, pricePerHour:40, needKmsh: 11.3, literLeft: 100, street:'אדמון', city:'הרצליה', available: true },
+        { codeCar: 516, licensing: '34567891', keyModel: 209, numSeaerts: '15', pic: 'מיניבוס מרצדס שוהם', year: '2020', gir: true, keyDrive: 300, pricePerHour:100, needKmsh:16, literLeft: 100, street:'רקנטי', city:'ירושלים', available: true },
+        { codeCar: 517, licensing: '45678912', keyModel: 210, numSeaerts: '5', pic: 'סוזוקי1', year: '2003', gir: false, keyDrive: 400, pricePerHour:20, needKmsh: 14.2, literLeft: 200, street:'בן זאב', city:'ירושלים', available: true },
+        { codeCar: 518, licensing: '56789123', keyModel: 210, numSeaerts: '5', pic: 'סוזוקי2', year: '2005', gir: false, keyDrive: 400, pricePerHour:20, needKmsh: 14.1, literLeft: 300, street:'בן יהודה', city:'תל אביב', available: true },
+        { codeCar: 519, licensing: '67891234', keyModel: 210, numSeaerts: '5', pic: 'סוזוקי3', year: '2001', gir: false, keyDrive: 403, pricePerHour:20, needKmsh: 14, literLeft: 400, street:'בר אילן', city:'ירושלים', available: true },
+        { codeCar: 520, licensing: '78945612', keyModel: 211, numSeaerts: '7', pic: 'סקודה יטי1', year: '2020', gir: true, keyDrive: 400, pricePerHour:30, needKmsh: 13.5, literLeft: 500, street:'אהרונוביץ', city:'בני ברק', available: true },
+        { codeCar: 521, licensing: '89123405', keyModel: 211, numSeaerts: '5', pic: 'סקודה סקאלה', year: '2014', gir: true, keyDrive: 404, pricePerHour:20, needKmsh: 13.7, literLeft: 100, street:'זבוטינסקי', city:'רמת גן', available: true },
+        { codeCar: 522, licensing: '30020050', keyModel: 211, numSeaerts: '7', pic: 'סקודה סקאלה-2', year: '2020', gir: true, keyDrive: 402, pricePerHour:30, needKmsh: 13.6, literLeft: 200, street:'בן יהודה', city:'תל אביב', available: true },
+        { codeCar: 523, licensing: '10203040', keyModel: 211, numSeaerts: '5', pic: 'סקודה סקאלה3', year: '2020', gir: true, keyDrive: 402, pricePerHour:20, needKmsh: 13.5, literLeft: 300, street:'ירושלים', city:'בני ברק', available: true },
+        { codeCar: 524, licensing: '20304050', keyModel: 203, numSeaerts: '20', pic: 'פוטון טיוטה', year: '2020', gir: true, keyDrive: 400, pricePerHour:100, needKmsh: 16, literLeft: 400, street:'גני הדר', city:'פתח תקווה', available: true },
+        { codeCar: 525, licensing: '30405060', keyModel: 212, numSeaerts: '7', pic: 'קיה - נירו פלוס', year: '2018', gir: true, keyDrive:403, pricePerHour:30, needKmsh: 13.3, literLeft: 500, street:'תלפיות', city:'תלפיות', available: true },
+        { codeCar: 526, licensing: '40506070', keyModel: 213, numSeaerts: '7', pic: 'קיה - סול', year: '2015', gir: true, keyDrive: 403, pricePerHour:30, needKmsh: 13.2, literLeft: 100, street:'ירמיהו', city:'ירושלים', available: true },
+        { codeCar: 527, licensing: '50607080', keyModel: 214, numSeaerts: '7', pic: 'קיה סיד', year: '2020', gir: true, keyDrive: 404, pricePerHour:30, needKmsh: 13.1, literLeft: 200, street:'המג', city:'ירושלים', available: true },
+        { codeCar: 528, licensing: '60708090', keyModel: 215, numSeaerts: '7', pic: 'קיה ריו', year: '2020', gir: true, keyDrive: 404, pricePerHour:30, needKmsh: 13, literLeft: 300, street:'פנים מאירות', city:'ירושלים', available: true },
+        { codeCar: 529, licensing: '70809060', keyModel: 215, numSeaerts: '5', pic: 'קיה ריו-2', year: '2020', gir: true, keyDrive: 404, pricePerHour:20, needKmsh: 12.9, literLeft: 400, street:'קרית ספר', city:'מודיעיו עילית', available: true },
+        { codeCar: 530, licensing: '80901020', keyModel: 216, numSeaerts: '5', pic: 'רנו - זואי1', year: '2019', gir: true, keyDrive: 400, pricePerHour:20, needKmsh: 12.8, literLeft: 100, street:'חשמונאים', city:'מודיעין', available: false },
+        { codeCar: 531, licensing: '90302050', keyModel: 216, numSeaerts: '5', pic: 'רנו זואי - 2', year: '2020', gir: true, keyDrive: 403, pricePerHour:20, needKmsh: 12.7, literLeft: 200, street:'מלכי ישראל', city:'ירושלים', available: true },
+        { codeCar: 532, licensing: '11223344', keyModel: 217, numSeaerts: '5', pic: 'רנו-מגאן', year: '2018', gir: true, keyDrive: 400, pricePerHour:20, needKmsh: 12.6, literLeft: 300, street:'שמגר', city:'ירושלים', available: true },
+        { codeCar: 533, licensing: '22334455', keyModel: 218, numSeaerts: '7', pic: 'שברולט - בלייזר', year: '2020', gir: true, keyDrive: 401, pricePerHour:30, needKmsh: 12.5, literLeft: 400, street:'רשבי', city:'מירון', available: true },
+        { codeCar: 534, licensing: '33445566', keyModel: 218, numSeaerts: '7', pic: 'שברולט בלייזר', year: '2014', gir: true, keyDrive: 403, pricePerHour:30, needKmsh: 12.4, literLeft: 500, street:'גבעת שאול', city:'ירושלים', available: true },
+        { codeCar: 535, licensing: '44556677', keyModel: 218, numSeaerts: '7', pic: 'שברולט בלייזר-3', year: '2020', gir: true, keyDrive: 402, pricePerHour:30, needKmsh: 12.3, literLeft: 100, street:'בית הדפוס', city:'ירושלים', available: true },
+        { codeCar: 536, licensing: '55667788', keyModel: 219, numSeaerts: '5', pic: 'שברולט סוניק', year: '2015', gir: false, keyDrive: 402, pricePerHour:20, needKmsh: 12.2, literLeft:200, street:'עלי הכהן', city:'ירושלים', available: true },
+        { codeCar: 537, licensing: '85698745', keyModel: 219, numSeaerts: '5', pic: 'שברולט סוניק1', year: '2010', gir: false, keyDrive: 403, pricePerHour:20, needKmsh:12, literLeft:300, street:'מינץ', city:'ירושלים', available: true },
+        { codeCar: 538, licensing: '50060050', keyModel: 219, numSeaerts: '5', pic: 'שברולט סוניק2', year: '2020', gir: true, keyDrive: 400, pricePerHour:20, needKmsh: 10, literLeft: 400, street:'פנינה ', city:'ירושלים', available: true },
+        { codeCar: 539, licensing: '50040020', keyModel: 219, numSeaerts: '5', pic: 'שברולט סוניק4', year: '2004', gir: false, keyDrive: 400, pricePerHour:100, needKmsh: 10, literLeft: 500, street:'יעקובזון', city:'ירושלים', available: true },
+        { codeCar: 540, licensing: '1234567', keyModel: 223, numSeaerts: '2', pic: 'בימבה1', year: '2020', gir:false, keyDrive: 401, pricePerHour: 15, needKmsh: 10, literLeft: 30, street: 'פנים מאירות', city: 'ירושלים', available: true },
+        { codeCar: 541, licensing: '123456789', keyModel:220, numSeaters: '7', pic: 'גיפ אוונגר', year: '2023', gir: true, keyDrive:400 , pricePerHour:30, needKmsh: 13.3, literLeft: 50, street:'גבוטינסקי', city:'תל אביב', available: true },
+        { codeCar: 542, licensing: '12345678', keyModel: 221, numSeaerts: '7', pic: 'גיפ גראנד', year: '2022', gir: true, keyDrive: 400, pricePerHour:30, needKmsh: 14, literLeft: 70, street:'פתח תקווה', city:'ירושלים', available: true },
+
+    ],
+
+    currentCars:[],
+    lends: [//השאלות
+        { keyLend: 600, keyUser: '104', codeCar: 500, date: '2024-08-08T20:18:30.123Z' },
+        { keyLend: 602, keyUser: '103', codeCar: 501, date: '2024-08-08T20:18:30.123Z' },
+        { keyLend: 603, keyUser: '102', codeCar: 520, date: '2024-08-08T20:18:30.123Z' },
+        { keyLend: 604, keyUser: '100', codeCar: 530, date: '2024-08-08T20:18:30.123Z' },
+    ],
+    returns: [//החזרות
+        { keyReturn: 700, keyLend: 602, date: '2024-09-05T10:30.145Z', leftLiter: 80, pay: '3018', isPaid: true },
+        { keyReturn: 701, keyLend: 600, date: '2024-08-05T23:30.145Z', leftLiter: 50, pay: '3979', isPaid: true },
+        { keyReturn: 702, keyLend: 603, date: '2024-08-05T24:00.145Z', leftLiter: 60, pay: '4000', isPaid: true }
+    ],
+
+    Cars:[{}],
+    Users:[{}],
+    currentUser: {},
+    
+    selectedCar: {},
+}
+    
