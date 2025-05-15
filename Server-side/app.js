@@ -13,7 +13,7 @@ const port = 3001
 app.use(bodyParser.json())
 app.use(cors())
 dotenv.config()
-mongoose.connect(process.env.LOCALURI)
+mongoose.connect(process.env.URI)
     .then(() => {
         console.log('connect to mongoDB');
     })
