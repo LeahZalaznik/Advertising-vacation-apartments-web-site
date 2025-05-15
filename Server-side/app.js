@@ -26,6 +26,19 @@ app.use('/category', categoryRouter)
 app.use('/apartment', apartmentRouter)
 app.use('/city', cityRouter)
 app.use('/advertiser', advertiserRouter)
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// הגדרת תיקיית build כסטטית
+app.use(express.static(path.join(__dirname, 'Client-side', 'build')));
+
+// כל בקשה אחרת מחזירה את index.html
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'Client-side', 'build', 'index.html'));
+});
 
 app.listen(port, () => {
     console.log(`my application is running on http://localhost:${port}`)
