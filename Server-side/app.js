@@ -40,7 +40,7 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'Client-side', 'build', 'index.html'));
 });
 
-app.listen(port, () => {
+app.listen(port, '0.0.0.0',() => {
     console.log(`my application is running on http://localhost:${port}`)
 
 })
