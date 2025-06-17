@@ -35,7 +35,7 @@ export const AddApartment = ({ isOpen, setOpen }) => {
     const {control, setValue, register, handleSubmit, formState: { errors }, watch } = useForm({ resolver: yupResolver(schema) });
 
     useEffect(() => {
-        axios.get('http://localhost:3001/category')
+        axios.get('http://51.20.12.20:3001/category')
             .then(response => {
                 setCategory(response.data)
                 getAll()
@@ -43,7 +43,7 @@ export const AddApartment = ({ isOpen, setOpen }) => {
             .catch(error => console.log('Error:', error));
     }, []);
     const getAll=(() => {
-        axios.get('http://localhost:3001/apartment')
+        axios.get('http://51.20.12.20:3001/apartment')
           .then(response => {
             dispatch(setList(response.data));
           })
@@ -84,7 +84,7 @@ export const AddApartment = ({ isOpen, setOpen }) => {
     
     
         // שליחה לשרת
-        axios.post('http://localhost:3001/apartment', formData, {
+        axios.post('http://51.20.12.20:3001/apartment', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',
             },

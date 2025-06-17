@@ -33,7 +33,7 @@ export const UpdateApartment = ({ isOpen, setOpen, apartment }) => {
     });
 
     useEffect(() => {
-        axios.get('http://localhost:3001/category')
+        axios.get('http://51.20.12.20:3001/category')
             .then(response => setCategories(response.data))
             .catch(error => console.log('Error:', error));
         setValue("name", apartment.name || "");
@@ -61,7 +61,7 @@ export const UpdateApartment = ({ isOpen, setOpen, apartment }) => {
 console.log(advertiser);
 console.log(headers);
 
-        axios.put(`http://localhost:3001/apartment/${apartment?._id}`, updatedApartment,{headers})
+        axios.put(`http://51.20.12.20:3001/apartment/${apartment?._id}`, updatedApartment,{headers})
             .then(response => {
                 console.log("הדירה עודכנה בהצלחה:", response.data);
                 dispatch(setList(response.data.apartments))

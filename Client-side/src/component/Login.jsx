@@ -19,7 +19,7 @@ export const Login = () => {
     const onSubmit = (data) => {
         console.log(data);
         
-            axios.post(`http://localhost:3001/advertiser`,data)
+            axios.post(`http://51.20.12.20:3001/advertiser`,data)
             .then(response => {
                 console.log(response.status);
                 if (response.status === 200) {

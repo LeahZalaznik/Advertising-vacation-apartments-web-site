@@ -14,7 +14,7 @@ export const Cards = () => {
   const [filters, setFilters] = useState({ category: '', city: '', price: '', minPrice: '', maxPrice: '', minBeds: '', maxBeds: '', bed: '', advertiser: '' });
 
   useEffect(() => {
-    axios.get('http://localhost:3001/apartment')
+    axios.get('http://51.20.12.20:3001/apartment')
       .then(response => {
         dispatch(setList(response.data));
       })
@@ -25,7 +25,7 @@ export const Cards = () => {
 
   useEffect(() => {
     const applyFilters = debounce(() => {
-      axios.post('http://localhost:3001/apartment/ByConditions', filters)
+      axios.post('http://51.20.12.20:3001/apartment/ByConditions', filters)
         .then(response => {
           setFilteredApartment(response.data);
         })

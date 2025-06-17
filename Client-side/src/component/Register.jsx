@@ -22,7 +22,7 @@ export const Register = () => {
     const myLogin = () => {
         console.log(advertiserEmail) 
         console.log(advertiserEmail)        
-            axios.get(`http://localhost:3001/advertiser/Login/${advertiserEmail}`)
+            axios.get(`http://51.20.12.20:3001/advertiser/Login/${advertiserEmail}`)
             .then(response => {
                 console.log(response.status);
                 if (response.status === 200) {

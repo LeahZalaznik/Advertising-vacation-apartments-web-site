@@ -10,7 +10,7 @@ export default function CitySelect({ value,onSelect }) {
     
 
     useEffect(() => {
-        axios.get(`http://localhost:3001/city`)
+        axios.get(`http://51.20.12.20:3001/city`)
         .then(response => setMyCities(response.data))
         .catch(error => console.error("Error fetching my cities:", error));
         fetchCitiesFromAPI(); 
@@ -42,7 +42,7 @@ export default function CitySelect({ value,onSelect }) {
                 onSelect(city.data._id);
             } 
             else {
-                city = await axios.post("http://localhost:3001/city", {name:selectedCity });
+                city = await axios.post("http://51.20.12.20:3001/city", {name:selectedCity });
                 console.log("🆕 עיר נוספה למסד:", city.data);
                 onSelect(city.data._id); 
             }

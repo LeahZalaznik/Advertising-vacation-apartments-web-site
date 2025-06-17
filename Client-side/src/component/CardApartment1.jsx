@@ -21,7 +21,7 @@ export const CardApartment = ({ setApartments, apartment, type }) => {
   const headers = { 'Authorization': `Bearer ${token}` };
 
   useEffect(() => {
-    axios.get(`http://localhost:3001/city/${apartment?.city?._id}`)
+    axios.get(`http://51.20.12.20:3001/city/${apartment?.city?._id}`)
       .then(response => {
         setWeather({
           temp: response.data.temp,
@@ -54,7 +54,7 @@ export const CardApartment = ({ setApartments, apartment, type }) => {
         {type === 1 ? (
             <CardActions sx={{ justifyContent: 'space-between' }}>
                 <IconButton color="error" onClick={() => 
-                    axios.delete(`http://localhost:3001/apartment/${apartment._id}`, { headers })
+                    axios.delete(`http://51.20.12.20:3001/apartment/${apartment._id}`, { headers })
                     .then(response => {
                         dispatch(setList(response.data.apartments));
                     })}>

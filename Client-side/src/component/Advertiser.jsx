@@ -20,7 +20,7 @@ export const Advertiser = () => {
 
     useEffect(() => {
         if (advertiser?.advertiser?._id) {
-            axios.get(`http://localhost:3001/apartment/ByAdvertiser/${advertiser.advertiser._id}`, { headers })
+            axios.get(`http://51.20.12.20:3001/apartment/ByAdvertiser/${advertiser.advertiser._id}`, { headers })
                 .then(response => {
                     if (JSON.stringify(response.data) !== JSON.stringify(list)) {
                         setList(response.data);
