@@ -210,7 +210,7 @@ export const getByConditions = (req, res) => {
             res.status(200).send(data)
         })
         .catch(err => {
-            res.statזus(500).send({ error: err.message })
+            res.status(500).send({ error: err.message })
 
         });
 }
